@@ -1,0 +1,28 @@
+public  class Test {
+    public static void main(String[] args) {
+        String name, good;
+        Integer amount, plusam;
+        TreeMap<String,TreeMap<String, Integer>> dictionary = new TreeMap<String,TreeMap<String, Integer>>();
+        Scanner scanner = new Scanner(System.in);
+        while (scanner.hasNext()){
+            name = scanner.next(); good = scanner.next(); amount = scanner.nextInt();
+            if (dictionary.containsKey(name)){
+                if (dictionary.get(name).containsKey(good)){plusam = dictionary.get(name).get(good) + amount;
+                    dictionary.get(name).put(good, plusam);}else{
+                    TreeMap<String, Integer> indict = dictionary.get(name);
+                    indict.put(good, amount);
+                }
+            }else{
+                TreeMap<String, Integer> indict = new TreeMap<String, Integer>();
+                indict.put(good, amount);
+                dictionary.put(name, indict);
+            }
+        }
+        for (String key: dictionary.keySet()){
+            System.out.println(key + ":");
+            for (String goodkey: dictionary.get(key).keySet()){
+                System.out.println(goodkey + " " + Integer.toString(dictionary.get(key).get(goodkey)));
+            }
+        }
+    }
+}
